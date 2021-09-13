@@ -6,6 +6,7 @@ from app import middlewares, filters, handlers
 
 async def on_startup(dp):
     await utils.on_startup_notify(dp)
+    await utils.set_bot_commands(dp)
 
 
 if __name__ == '__main__':
