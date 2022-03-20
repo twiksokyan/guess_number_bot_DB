@@ -1,13 +1,15 @@
-import os
+from environs import Env
 
-from dotenv import load_dotenv
 
-load_dotenv()
+env = Env()
+env.read_env()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = env.str("BOT_TOKEN")
+admins = env.list("ADMINS", subcast=int)
+IP = env.str("ip")
 
-admins = [
-    os.getenv("ADMIN_ID"),
-]
-
-ip = os.getenv("ip")
+# for DB
+DB_USER = env.str("DB_USER") # имя пользователя (twiksokyan)
+DB_PASS = env.str("DB_PASS") # пароль для юзера
+DB_NAME = env.str("DB_NAME") # имя БД
+DB_HOST = env.str("DB_HOST") # обычно localhost, если на компе запускаю

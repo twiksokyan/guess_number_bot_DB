@@ -1,4 +1,4 @@
-from app.loader import dp
+from ..loader import dp
 
 from .throttling import ThrottlingMiddleware
 

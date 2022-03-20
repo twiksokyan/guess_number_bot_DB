@@ -1,8 +1,6 @@
 import random
 
 
-games_dict = dict()
-
 class Number_Game:
     min_num = 1
     max_num = 1000
@@ -18,23 +16,29 @@ class Number_Game:
     def __repr__(self):
         return f'GAME: user = {self.user}, username = {self.user_name}, act = {self.is_active}, number = {self.number}, try = {self.try_cnt}, eblan = {self.eblan_cnt}\n'
 
-    def more_less_equal(self, num: int):
-        self.try_cnt += 1
-        if num == self.number:
+
+    # DB methods
+    @staticmethod
+    def send_eblan_to_admin_db(user_name):
+        return f'Пользователь @{user_name} еблан!'
+
+    @staticmethod
+    def more_less_equal_db(num: int, guessed_number: int):
+        if num == guessed_number:
             return 1
-        elif num > self.number:
+        elif num > guessed_number:
             return 2
         else:
             return 3
 
-    def send_start_to_admin(self):
-        return f'Пользователь @{self.user_name} начал игру.\nЕму загадано число {self.number}.'
+    @staticmethod
+    def send_end_to_admin_db(username, number, try_cnt):
+        return f'Пользователь @{username} угадал число {number} за {try_cnt} попыток.'
 
-    def send_end_to_admin(self):
-        return f'Пользователь @{self.user_name} угадал число {self.number} за {self.try_cnt} попыток.'
+    @staticmethod
+    def send_end_by_command_db(username, try_cnt):
+        return f'Пользователь @{username} прервал игру спустя {try_cnt} попыток.'
 
-    def send_end_by_command(self):
-        return f'Пользователь @{self.user_name} прервал игру спустя {self.try_cnt} попыток.'
-
-    def send_eblan_to_admin(self):
-        return f'Пользователь @{self.user_name} еблан!'
+    @staticmethod
+    def send_start_to_admin_db(username, number):
+        return f'Пользователь @{username} начал игру.\nЕму загадано число {number}.'

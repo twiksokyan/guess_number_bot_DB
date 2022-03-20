@@ -1,0 +1,36 @@
+version: "3.3"
+
+services:
+  db:
+    container_name: database_postgres
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: $DB_PASS
+      POSTGRES_USER: $DB_USER
+      POSTGRES_DB: $DB_NAME
+    restart: always
+    ports:
+    - 5432:5432
+    networks:
+    - botnetwork
+    volumes:
+    - ./postgres_data:/var/lib/postgresql
+
+
+  tgbot:
+    container_name: guess_number_bot
+    build:
+      context: .
+    command: python app/__main__.py
+    restart: always
+    networks:
+      - botnetwork
+    env_file:
+      - ".env"
+    volumes:
+      - .:/src
+
+
+networks:
+  botnetwork:
+    driver: bridge
