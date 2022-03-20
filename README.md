@@ -1,13 +1,9 @@
-# Guess The Number Bot
+# Guess The Number Bot with Postgres
 
-My first telegram-bot deployed on a server.
-
-It generates a number between 1 and 1000, you guess it! It also with a meme sense of humor.
-
-All interface besides bot commands on Russian language.
+My guess number bot with Postgres database.
 
 @twks_guess_number_bot - enjoy!
 
-stack: python, aiogram.
+stack: python, aiogram, asyncpg.
 
 Further more.
